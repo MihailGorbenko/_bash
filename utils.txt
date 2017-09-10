@@ -1,0 +1,11 @@
+mv
+rm
+cp
+find
+cd
+ls
+mkdir
+touch
+exit
+clear
+rename
