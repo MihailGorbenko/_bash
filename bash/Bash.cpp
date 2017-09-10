@@ -9,8 +9,9 @@ Bash::Bash() :
 	if (!uNames)
 	{
 		Display out;
-		out.displayErr("Can't find 'utils.txt' file in the working directory,"
-			"you can download it here >> https://github.com/MihailGorbenko/_bash.git");
+		out.displayErr("Can't find 'utils.txt' file in the working directory,\n you can download it here >>");
+	    out.displayDir("https://github.com/MihailGorbenko/_bash.git");
+		system("pause");
 		exit(EXIT_FAILURE);
 	}
 	std::string temp;
