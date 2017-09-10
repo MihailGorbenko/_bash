@@ -15,6 +15,7 @@ Remove::~Remove()
 
 void Remove::exec()  throw(BashErrInfo)
 {
+	FILE *test;
 	if (rPath.find(':') != std::string::npos)       //if absolute path
 	{
 		currPath = rPath;
@@ -28,30 +29,23 @@ void Remove::exec()  throw(BashErrInfo)
 	{
 		throw BashErrInfo("Such file or directory doesn't exist!");
 	}
-
-	_finddata_t  *foundFile = new _finddata_t;
-	long resultList;
-    int status;
-
-	resultList = _findfirst(currPath.c_str(), foundFile);
-	status = resultList;
-	if (status != -1)    //if file
+	if ((test = fopen(currPath.c_str(), "r")) == NULL)  // if dir
 	{
-		if (foundFile->attrib&_A_SUBDIR)
-		{
-			recRem(currPath);
-		}
-		else
-		{
-			remove(currPath.c_str());
-		}
+		recRem(currPath);
 	}
-	delete foundFile;
-	_findclose(resultList);
+	else                                     //if file
+	{
+		fclose(test);
+		outDev.displayStatus("Removing... >" + currPath);
+		remove(currPath.c_str());
+		outDev.displayStatus("Done!");
+
+	}
 }
 
 void Remove::recRem(std::string & path)
 {
+	std::string action = "Removing... >";
 	std::string tempPath = path,
 		        mask     = "*.*";
 	tempPath += '/';
@@ -67,15 +61,20 @@ void Remove::recRem(std::string & path)
 		{
 			if (found.attrib&_A_SUBDIR)
 			{
-				recRem(tempPath += found.name);
+				recRem(tempPath + found.name);
 			}
 			else
 			{
-				remove((tempPath + found.name).c_str());
+				std::string temp = tempPath + found.name;
+				
+				outDev.displayStatus(action + temp);
+				remove(temp.c_str());
 			}
 		}
 		status = _findnext(resList, &found);
 	}
 	_findclose(resList);
+	outDev.displayStatus(action + path);
 	_rmdir(path.c_str());
+	outDev.displayStatus("Done!");
 }

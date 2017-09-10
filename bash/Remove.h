@@ -1,6 +1,7 @@
 #pragma once
 #include "Command.h"
 #include "BashExeptions.h"
+#include "Display.h"
 
 #include <string>
 #include <io.h>
@@ -18,5 +19,6 @@ private:
 	void recRem(std::string &path);
 	std::string rPath,
 				currPath;
+	Display outDev;
 };
 

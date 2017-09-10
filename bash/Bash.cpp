@@ -2,27 +2,24 @@
 
 Bash::Bash() :	
 	currCommand(NULL),
-	utils
-	{
-	"mv",       //cp + rm
-	"rm",		//done
-	"cp",
-	"grep",
-	"cd",		//done
-	"ls",		//done
-	"mkdir",	//done
-	"touch",	//done
-	"exit",		//done
-	"clear"   //done
-	},
 	curPath("c:/Users/mrmih/")
 {
+	
+	std::fstream uNames("utils.txt", std::ios::in);
+	if (!uNames) exit(EXIT_FAILURE);
+	std::string temp;
+	while (!uNames.eof())
+	{
+		getline(uNames, temp);
+		utils.push_back(temp);
+	}
 }
 
 
 Bash::~Bash()
 {
-	delete currCommand;
+	if(currCommand != NULL)
+		delete currCommand;
 }
 
 void Bash::getCommand() throw(BashErrInfo)
@@ -45,36 +42,49 @@ void Bash::getCommand() throw(BashErrInfo)
 			action = static_cast<exCmnd>(cmdIndex);
 		}
 	}
-	if (action == no_command) throw BashErrInfo("Such command doesn't exist");
+	if (action == no_command)
+	{
+		std::string trash;
+		getline(cin, trash);
+		throw BashErrInfo("Such command doesn't exist");
+	}
 
 	switch (action)
 	{
 	case mv:
 	{
+		std::cin >> src >> dst;
 		check();
-		 
+		Copy * cp = new Copy(src, dst,curPath);
+		cp->exec();
+		currCommand = new Remove(src,curPath);
+		delete cp;
 		break;
 	}
 	case rm:
 	{
-		cin >> dst;
+		std::cin >> dst;
 		check();
 		currCommand = new Remove(dst,curPath);	
 		break;
 	}
 	case cp:
 	{
+		std::cin >> src >> dst;
 		check();
+		currCommand = new Copy(src, dst,curPath);
 		break;
 	}
-	case grep:
+	case _find:
 	{
+		cin >> src;
 		check();
+		currCommand = new Find( src,curPath);
 		break;
 	}
 	case cd:
 	{
-		cin >> dst;
+		std::cin >> dst;
 		check();
 		currCommand = new ChangeDir(dst, curPath);
 		break;
@@ -87,14 +97,14 @@ void Bash::getCommand() throw(BashErrInfo)
 	}
 	case makedir:
 	{
-		cin >> dst;
+		std::cin >> dst;
 		check();
 		currCommand = new MakeDir(dst,curPath);
 		break;
 	}
 	case touch:
 	{
-		cin >> dst;
+		std::cin >> dst;
 		check();
 		currCommand = new Create_File(dst,curPath);
 		break;
@@ -111,7 +121,14 @@ void Bash::getCommand() throw(BashErrInfo)
 		system("cls");
 		break;
 	}
+	case re_name:
+	{
+		std::cin >> src>>dst;
+		check();
+		currCommand = new Rename(src, dst, curPath);
+		break;
 	}
+   }
 }
 
 

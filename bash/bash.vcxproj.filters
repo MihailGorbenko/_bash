@@ -48,14 +48,14 @@
     <ClCompile Include="MakeDir.cpp">
       <Filter>Файлы исходного кода\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Move.cpp">
-      <Filter>Файлы исходного кода\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="Remove.cpp">
       <Filter>Файлы исходного кода\Commands</Filter>
     </ClCompile>
     <ClCompile Include="ShowDir.cpp">
       <Filter>Файлы исходного кода\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Rename.cpp">
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +86,6 @@
     <ClInclude Include="MakeDir.h">
       <Filter>Заголовочные файлы\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Move.h">
-      <Filter>Заголовочные файлы\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Remove.h">
       <Filter>Заголовочные файлы\Commands</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Bash.h">
       <Filter>Заголовочные файлы\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Rename.h">
+      <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

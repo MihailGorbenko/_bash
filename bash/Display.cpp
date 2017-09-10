@@ -61,3 +61,16 @@ void Display::displayFile(const std::string &msg)
 {
 	std::cout << msg <<std::endl;
 }
+
+void Display::displayStatus(const std::string &msg)
+{
+
+	SetConsoleTextAttribute(
+		stdCon,
+		darkBlue |
+		FOREGROUND_INTENSITY);
+	std::cout << msg << std::endl;
+	SetConsoleTextAttribute(
+		stdCon,
+		white);
+}

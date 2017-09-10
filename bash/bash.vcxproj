@@ -149,8 +149,8 @@
     <ClInclude Include="Display.h" />
     <ClInclude Include="Find.h" />
     <ClInclude Include="MakeDir.h" />
-    <ClInclude Include="Move.h" />
     <ClInclude Include="Remove.h" />
+    <ClInclude Include="Rename.h" />
     <ClInclude Include="ShowDir.h" />
   </ItemGroup>
   <ItemGroup>
@@ -163,8 +163,8 @@
     <ClCompile Include="Find.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MakeDir.cpp" />
-    <ClCompile Include="Move.cpp" />
     <ClCompile Include="Remove.cpp" />
+    <ClCompile Include="Rename.cpp" />
     <ClCompile Include="ShowDir.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
