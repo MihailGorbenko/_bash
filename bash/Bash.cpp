@@ -6,7 +6,13 @@ Bash::Bash() :
 {
 	
 	std::fstream uNames("utils.txt", std::ios::in);
-	if (!uNames) exit(EXIT_FAILURE);
+	if (!uNames)
+	{
+		Display out;
+		out.displayErr("Can't find 'utils.txt' file in the working directory,"
+			"you can download it here >> https://github.com/MihailGorbenko/_bash.git");
+		exit(EXIT_FAILURE);
+	}
 	std::string temp;
 	while (!uNames.eof())
 	{
