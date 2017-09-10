@@ -2,7 +2,7 @@
 
 Bash::Bash() :	
 	currCommand(NULL),
-	curPath("c:/Users/mrmih/")
+	curPath("c:/")
 {
 	
 	std::fstream uNames("utils.txt", std::ios::in);
